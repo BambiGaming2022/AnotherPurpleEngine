@@ -262,6 +262,25 @@ class FunkinLua {
 			#end
 			return false;
 		});
+
+		// precaching
+		Lua_helper.add_callback(lua, "addCharacterToList", function(name:String, type:String) {
+			var charType:Int = 0;
+			switch(type.toLowerCase()) {
+				case 'dad': charType = 1;
+				case 'gf' | 'girlfriend': charType = 2;
+			}
+			game.addCharacterToList(name, charType);
+		});
+		Lua_helper.add_callback(lua, "precacheImage", function(name:String, ?allowGPU:Bool = true) {
+			Paths.image(name, allowGPU);
+		});
+		Lua_helper.add_callback(lua, "precacheSound", function(name:String) {
+			Paths.sound(name);
+		});
+		Lua_helper.add_callback(lua, "precacheMusic", function(name:String) {
+			Paths.music(name);
+		});
 		
 		Lua_helper.add_callback(lua, "setSpriteShader", function(obj:String, shader:String) {
 			if(!ClientPrefs.shaders) return false;
