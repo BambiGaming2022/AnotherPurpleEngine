@@ -201,6 +201,8 @@ class CharacterEditorState extends MusicBeatState
 		FlxG.mouse.visible = true;
 		reloadCharacterOptions();
 
+		if(ClientPrefs.data.cacheOnGPU) Paths.clearUnusedMemory();
+
 		super.create();
 	}
 
